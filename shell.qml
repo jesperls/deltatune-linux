@@ -21,8 +21,8 @@ PanelWindow {
 
     color: "transparent"
 
-    width: bitmapTitle.width
-    height: bitmapTitle.height * 2
+    implicitWidth: bitmapTitle.width
+    implicitHeight: bitmapTitle.height * 2
 
     property string musicTitleFontImage: "./fonts/MusicTitleFont.png"
     property string shinonomeGothicImage: "./fonts/ShinonomeGothic.png"
