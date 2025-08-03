@@ -7,16 +7,22 @@ import "./fonts/ShinonomeGothic.js" as ShinonomeGothic
 import "./fonts/Ramche.js" as Ramche
 
 PanelWindow {
+    id: deltatune
+
     anchors {
         top: true
         right: true
     }
 
+    margins {
+        top: 25
+        right: 25
+    }
+
     color: "transparent"
 
-    property real margin: 40
-    implicitWidth: child.implicitWidth + margin * 2 + bitmapTitle.textWidth
-    implicitHeight: child.implicitHeight + margin * 2
+    width: bitmapTitle.width
+    height: bitmapTitle.height * 2
 
     property string musicTitleFontImage: "./fonts/MusicTitleFont.png"
     property string shinonomeGothicImage: "./fonts/ShinonomeGothic.png"
@@ -24,15 +30,11 @@ PanelWindow {
 
     Item {
         id: child
-        anchors.right: parent.right
-        anchors.rightMargin: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
 
         Item {
             id: bitmapTitle
 
             property string text: ""
-            property real textWidth: 50
             property real characterSpacing: 1.2
             property string fontImage: "./fonts/MusicTitleFont.png"
 
@@ -138,7 +140,7 @@ PanelWindow {
 
                         width: charData.width * 2
                         height: charData.height * 2
-                        x: charData.xoffset // * 2
+                        x: charData.xoffset * 2
                         y: charData.yoffset // * 2
 
                         smooth: false
@@ -153,10 +155,9 @@ PanelWindow {
 
                 stdout: StdioCollector {
                     onStreamFinished: {
-                        var title = this.text.trim().toUpperCase();
+                        var title = this.text.trim();
                         if (title.length > 0) {
                             bitmapTitle.text = "♪ ~ " + title;
-                            bitmapTitle.textWidth = ((title.length + 3) * 14) + 40;
                         } else {
                             bitmapTitle.text = "";
                         }
@@ -177,14 +178,12 @@ PanelWindow {
                         running: true
                         stdout: StdioCollector {
                             onStreamFinished: {
-                            var title = this.text.trim().toUpperCase()
-                            if (title.length > 0) {
-                                bitmapTitle.text =  "♪ ~ " + title;
-                                bitmapTitle.textWidth = ((title.length + 3) * 14) + 40;
-                            } else {
-                                bitmapTitle.text = "NO MUSIC PLAYING"
-                            }
-                            // parent.destroy()
+                                var title = this.text.trim()
+                                if (title.length > 0) {
+                                    bitmapTitle.text =  "♪ ~ " + title;
+                                } else {
+                                    bitmapTitle.text = ""
+                                }
                             }
                         }
                         }
