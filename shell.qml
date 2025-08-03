@@ -156,7 +156,7 @@ PanelWindow {
                         var title = this.text.trim().toUpperCase();
                         if (title.length > 0) {
                             bitmapTitle.text = "♪ ~ " + title;
-                            bitmapTitle.textWidth = (bitmapTitle.text.length * 14) + 50;
+                            bitmapTitle.textWidth = ((title.length + 3) * 14) + 40;
                         } else {
                             bitmapTitle.text = "";
                         }
@@ -180,7 +180,7 @@ PanelWindow {
                             var title = this.text.trim().toUpperCase()
                             if (title.length > 0) {
                                 bitmapTitle.text =  "♪ ~ " + title;
-                                bitmapTitle.textWidth = (bitmapTitle.text.length * 14) + 50;
+                                bitmapTitle.textWidth = ((title.length + 3) * 14) + 40;
                             } else {
                                 bitmapTitle.text = "NO MUSIC PLAYING"
                             }
