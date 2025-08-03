@@ -4,4 +4,4 @@
 
 ⚠️ Extremely work-in-progress lol ⚠️
 
-![Uploading image.png…]()
+<img width="1408" height="771" alt="1754263375" src="https://github.com/user-attachments/assets/57296ec5-fd1f-45ed-a102-9af09c56bdfe" />
