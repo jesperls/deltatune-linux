@@ -4,4 +4,4 @@
 
 ⚠️ Extremely work-in-progress lol ⚠️
 
-<img width="1566" height="1299" alt="1754258516" src="https://github.com/user-attachments/assets/5a31d7f9-5e00-4b07-80e9-c0cd963a2f4b" />
+<img width="3016" height="1267" alt="image" src="https://github.com/user-attachments/assets/e2463c9e-a2cb-4299-97cc-3b959ec50d08" />
