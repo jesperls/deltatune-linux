@@ -24,3 +24,10 @@
   - [ ] Position/anchor
 - [ ] AUR package & instructions
 - [ ] Artist info(?)
+
+## Additional credits
+
+- [Toastworth](https://x.com/Toastworth_) for creating the original [DeltaTune](https://deltatune.toastworth.com/) for Windows
+- [Toby Fox](https://bsky.app/profile/tobyfox.undertale.com/) and team for creating [DELTARUNE](https://deltarune.com/)
+
+This project is neither associated with the original DeltaTune nor DELTARUNE.
