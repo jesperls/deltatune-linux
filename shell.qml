@@ -15,7 +15,7 @@ PanelWindow {
     color: "transparent"
 
     property real margin: 40
-    implicitWidth: child.implicitWidth + margin * 2 + 550 // 50 + length
+    implicitWidth: child.implicitWidth + margin * 2 + bitmapTitle.textWidth
     implicitHeight: child.implicitHeight + margin * 2
 
     property string musicTitleFontImage: "./fonts/MusicTitleFont.png"
@@ -32,6 +32,7 @@ PanelWindow {
             id: bitmapTitle
 
             property string text: ""
+            property real textWidth: 50
             property real characterSpacing: 1.2
             property string fontImage: "./fonts/MusicTitleFont.png"
 
@@ -155,6 +156,7 @@ PanelWindow {
                         var title = this.text.trim().toUpperCase();
                         if (title.length > 0) {
                             bitmapTitle.text = "♪ ~ " + title;
+                            bitmapTitle.textWidth = (bitmapTitle.text.length * 14) + 50;
                         } else {
                             bitmapTitle.text = "";
                         }
@@ -178,6 +180,7 @@ PanelWindow {
                             var title = this.text.trim().toUpperCase()
                             if (title.length > 0) {
                                 bitmapTitle.text =  "♪ ~ " + title;
+                                bitmapTitle.textWidth = (bitmapTitle.text.length * 14) + 50;
                             } else {
                                 bitmapTitle.text = "NO MUSIC PLAYING"
                             }
