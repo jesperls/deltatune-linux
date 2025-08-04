@@ -1,6 +1,7 @@
 # Installation directory
 INSTALL_DIR = /etc/xdg/quickshell/deltatune
 SCRIPT_FILE = deltatune
+PREFIX ?= /usr/local
 
 # Default target
 install: create_dirs install_files
@@ -15,13 +16,13 @@ install_files:
 	cp ./shell.qml $(INSTALL_DIR)/
 	cp ./fonts/*.png $(INSTALL_DIR)/fonts/
 	cp ./fonts/*.js $(INSTALL_DIR)/fonts/
-	cp $(SCRIPT_FILE) $(DESTDIR)$(bindir)/
-
+	install -m 755 deltatune $(DESTDIR)$(PREFIX)/bin/
+	
 # Uninstall target
 uninstall:
 	rm -rf $(INSTALL_DIR)
-	rm $(DESTDIR)$(bindir)/$(SCRIPT_FILE)
-
+	rm $(DESTDIR)$(PREFIX)/bin/$(SCRIPT_FILE)
+	
 # Clean target (no build artifacts to clean in this case)
 clean:
 
