@@ -21,7 +21,7 @@ PanelWindow {
 
     color: "transparent"
 
-    implicitWidth: bitmapTitle.width
+    implicitWidth: bitmapTitle.width * 2
     implicitHeight: bitmapTitle.height * 2
 
     property string musicTitleFontImage: "./fonts/MusicTitleFont.png"
@@ -37,9 +37,29 @@ PanelWindow {
             property string text: ""
             property real characterSpacing: 1.2
             property string fontImage: "./fonts/MusicTitleFont.png"
+            property string currentTitle: ""
+            property string currentStatus: ""
+            property bool isVisible: false
 
             width: textRow.width
             height: MusicTitleFont.fontInfo.lineHeight
+
+            opacity: isVisible ? 1.0 : 0.0
+            x: deltatune.implicitWidth - width
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: 600
+                }
+            }
+
+            Behavior on x {
+                PropertyAnimation {
+                    properties: "x"
+                    easing.type: Easing.InOutQuad
+                    duration: 600
+                }
+            }
 
             function getFontForChar(charCode) {
                 if (charCode === 32) {
@@ -148,48 +168,75 @@ PanelWindow {
                 }
             }
 
-            // Process to get the current playing song title
-            Process {
-                command: ["playerctl", "metadata", "xesam:title"]
-                running: true
-
-                stdout: StdioCollector {
-                    onStreamFinished: {
-                        var title = this.text.trim();
-                        if (title.length > 0) {
-                            bitmapTitle.text = "♪ ~ " + title;
-                        } else {
-                            bitmapTitle.text = "";
-                        }
-                    }
-                }
-            }
-
-            // Timer to refresh the title periodically
-            Timer {
-                interval: 2000
-                running: true
-                repeat: true
-                onTriggered: {
-                    var proc = Qt.createQmlObject(`
-                        import Quickshell.Io
-                        Process {
-                        command: ["playerctl", "metadata", "xesam:title"]
+            function updateMusicInfo() {
+                var statusProc = Qt.createQmlObject(`
+                    import Quickshell.Io
+                    Process {
+                        command: ["playerctl", "status"]
                         running: true
                         stdout: StdioCollector {
                             onStreamFinished: {
-                                var title = this.text.trim()
-                                if (title.length > 0) {
-                                    bitmapTitle.text =  "♪ ~ " + title;
-                                } else {
-                                    bitmapTitle.text = ""
+                                bitmapTitle.currentStatus = this.text.trim();
+                                bitmapTitle.checkTitleUpdate();
+                            }
+                        }
+                    }
+                `, bitmapTitle);
+            }
+
+            function checkTitleUpdate() {
+                if (currentStatus === "Playing") {
+                    var titleProc = Qt.createQmlObject(`
+                        import Quickshell.Io
+                        Process {
+                            command: ["playerctl", "metadata", "xesam:title"]
+                            running: true
+                            stdout: StdioCollector {
+                                onStreamFinished: {
+                                    var newTitle = this.text.trim();
+                                    if (newTitle.length > 0 && newTitle !== bitmapTitle.currentTitle) {
+                                        bitmapTitle.currentTitle = newTitle;
+                                        bitmapTitle.text = "♪ ~ " + newTitle;
+                                        bitmapTitle.showTitle();
+                                    } else if (newTitle.length === 0) {
+                                        bitmapTitle.hideTitle();
+                                    }
                                 }
                             }
                         }
-                        }
                     `, bitmapTitle);
+                } else {
+                    hideTitle();
                 }
             }
+
+            function showTitle() {
+                x = (deltatune.implicitWidth - width) + 100;
+                isVisible = true;
+                hideTimer.restart();
+            }
+
+            function hideTitle() {
+                x = (deltatune.implicitWidth - width) - 100;
+                isVisible = false;
+            }
+
+            Timer {
+                id: hideTimer
+                interval: 7000
+                running: false
+                repeat: false
+                onTriggered: bitmapTitle.hideTitle()
+            }
+
+            Timer {
+                interval: 1000
+                running: true
+                repeat: true
+                onTriggered: bitmapTitle.updateMusicInfo()
+            }
+
+            Component.onCompleted: updateMusicInfo()
         }
     }
 }

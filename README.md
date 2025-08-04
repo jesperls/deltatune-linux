@@ -26,7 +26,10 @@ deltatune
   - [x] Japanese
   - [x] Korean
 - [ ] Enter/leave animation
-  - [ ] React to `playerctl status`
+  - [x] React to `playerctl status`
+  - [x] Leave animation
+  - [ ] Enter animation
+  - [ ] Fix inconsistencies
 - [ ] Configuration
   - [ ] Scale
   - [ ] Position/anchor
