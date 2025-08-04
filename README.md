@@ -9,6 +9,13 @@
 - [Quickshell](https://quickshell.org/)
 - [Playerctl](https://github.com/altdesktop/playerctl)
 
+## Run
+
+```sh
+sudo make install
+deltatune
+```
+
 ## Todo
 
 ⚠️ Work-in-progress lol ⚠️
@@ -22,7 +29,7 @@
 - [ ] Configuration
   - [ ] Scale
   - [ ] Position/anchor
-- [ ] AUR package & instructions
+- [ ] AUR package
 - [ ] Artist info(?)
 
 ## Additional credits

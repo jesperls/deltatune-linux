@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if command -v qs >/dev/null 2>&1; then
+    qs -c deltatune
+else
+    echo "Error: 'qs' command not found. Please install quickshell first."
+    exit 1
+fi
