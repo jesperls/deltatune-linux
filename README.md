@@ -9,9 +9,10 @@
 - [Quickshell](https://quickshell.org/)
 - [Playerctl](https://github.com/altdesktop/playerctl)
 
-## Run
+## Install & run
 
 ```sh
+git clone https://github.com/ThatOneCalculator/deltatune-linux
 sudo make install
 deltatune
 ```
