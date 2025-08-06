@@ -2,6 +2,8 @@ import Quickshell
 import QtQuick
 import Quickshell.Io
 
+import "./config.js" as Config
+
 import "./fonts/MusicTitleFont.js" as MusicTitleFont
 import "./fonts/ShinonomeGothic.js" as ShinonomeGothic
 import "./fonts/Ramche.js" as Ramche
@@ -10,19 +12,24 @@ PanelWindow {
     id: deltatune
 
     anchors {
-        top: true
-        right: true
+        top: Config.c.anchors.top ?? true
+        right: Config.c.anchors.right ?? true
+        bottom: Config.c.anchors.bottom ?? false
+        left: Config.c.anchors.left ?? false
     }
 
     margins {
-        top: 25
-        right: 25
+        top: Config.c.margins.top ?? 25
+        right: Config.c.margins.right ?? 25
+        bottom: Config.c.margins.bottom ?? 0
+        left: Config.c.margins.left ?? 0
     }
 
-    color: "transparent"
+    color: Config.c.backgroundColor ?? "transparent"
+    property real configScale: Config.c.scale ?? 2
 
-    implicitWidth: bitmapTitle.width * 2
-    implicitHeight: bitmapTitle.height * 2
+    implicitWidth: bitmapTitle.width * configScale
+    implicitHeight: bitmapTitle.height * configScale
 
     property string musicTitleFontImage: "./fonts/MusicTitleFont.png"
     property string shinonomeGothicImage: "./fonts/ShinonomeGothic.png"
@@ -42,8 +49,10 @@ PanelWindow {
             property string currentTitle: ""
             property string currentStatus: ""
             property bool isAnimating: false
-            property real slideOffset: 30
             property real baseX: deltatune.implicitWidth - width
+            property real slideOffset: Config.c.slideOffset ?? 30
+            property real animationDuration: Config.c.animationDuration ?? 600
+            property real titleDuration: Config.c.titleDuration ?? 7000
 
             width: textRow.width
             height: MusicTitleFont.fontInfo.lineHeight
@@ -54,7 +63,7 @@ PanelWindow {
             Behavior on opacity {
                 enabled: !bitmapTitle.isAnimating
                 NumberAnimation {
-                    duration: 600
+                    duration: bitmapTitle.animationDuration
                     easing.type: Easing.InOutQuad
                     onRunningChanged: {
                         if (!running && bitmapTitle.opacity === 0.0) {
@@ -67,7 +76,7 @@ PanelWindow {
             Behavior on x {
                 enabled: !bitmapTitle.isAnimating
                 NumberAnimation {
-                    duration: 600
+                    duration: bitmapTitle.animationDuration
                     easing.type: Easing.InOutQuad
                 }
             }
@@ -165,14 +174,15 @@ PanelWindow {
                         property int charCode: bitmapTitle.text.charCodeAt(index)
                         property var fontData: bitmapTitle.getFontForChar(charCode)
                         property var charData: fontData.getCharData(charCode)
+                        property real configScale: Config.c.scale ?? 2
 
                         source: fontData.fontImage
                         sourceClipRect: Qt.rect(charData.x, charData.y, charData.width, charData.height)
 
-                        width: charData.width * 2
-                        height: charData.height * 2
-                        x: charData.xoffset * 2
-                        y: charData.yoffset // * 2
+                        width: charData.width * configScale
+                        height: charData.height * configScale
+                        x: charData.xoffset * configScale
+                        y: charData.yoffset // * configScale
 
                         smooth: false
                     }
@@ -252,7 +262,7 @@ PanelWindow {
 
             Timer {
                 id: hideTimer
-                interval: 7000
+                interval: bitmapTitle.titleDuration
                 running: false
                 repeat: false
                 onTriggered: bitmapTitle.hideTitle()

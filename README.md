@@ -28,20 +28,18 @@ sudo make install
 deltatune
 ```
 
-## Todo
+## Configuration
 
-- [x] Get the title displaying properly
+After installing, edit `/etc/xdg/quickshell/deltatune/config.js`. Configuration keys are explained in the file, the default configuration puts DeltaTune at the top-right.
+
+## Features
+
+- [x] Display title of current song
   - [x] ANSI (English, Spanish, etc)
   - [x] Japanese
   - [x] Korean
 - [x] Enter/leave animation
-  - [x] React to `playerctl status`
-  - [x] Leave animation
-  - [x] Enter animation
-  - [x] Fix inconsistencies
-- [ ] Configuration
-  - [ ] Scale
-  - [ ] Position/anchor
+- [x] Configuration
 - [x] AUR package
 - [ ] Artist info(?)
 - [ ] 🦀 Rewrite it in Rust

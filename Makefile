@@ -14,15 +14,16 @@ create_dirs:
 # Install files
 install_files:
 	cp ./shell.qml $(INSTALL_DIR)/
+	cp ./config.js $(INSTALL_DIR)/
 	cp ./fonts/*.png $(INSTALL_DIR)/fonts/
 	cp ./fonts/*.js $(INSTALL_DIR)/fonts/
 	install -m 755 deltatune $(DESTDIR)$(PREFIX)/bin/
-	
+
 # Uninstall target
 uninstall:
 	rm -rf $(INSTALL_DIR)
 	rm $(DESTDIR)$(PREFIX)/bin/$(SCRIPT_FILE)
-	
+
 # Clean target (no build artifacts to clean in this case)
 clean:
 
