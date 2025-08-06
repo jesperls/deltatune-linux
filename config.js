@@ -30,6 +30,10 @@ var c = {
   // Animation duration (in milliseconds)
   animationDuration: 600,
 
+  // Character spacing
+  // Determines full-char-width kerning
+  characterSpacing: 1.2,
+
   // Scale
   // Highly recommended to just keep this as 2
   // Whole numbers only!
