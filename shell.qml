@@ -30,6 +30,8 @@ PanelWindow {
 
     Item {
         id: child
+        width: deltatune.implicitWidth
+        height: deltatune.implicitHeight
 
         Item {
             id: bitmapTitle
@@ -39,25 +41,34 @@ PanelWindow {
             property string fontImage: "./fonts/MusicTitleFont.png"
             property string currentTitle: ""
             property string currentStatus: ""
-            property bool isVisible: false
+            property bool isAnimating: false
+            property real slideOffset: 30
+            property real baseX: deltatune.implicitWidth - width
 
             width: textRow.width
             height: MusicTitleFont.fontInfo.lineHeight
 
-            opacity: isVisible ? 1.0 : 0.0
-            x: deltatune.implicitWidth - width
+            opacity: 0.0
+            x: baseX - slideOffset
 
             Behavior on opacity {
+                enabled: !bitmapTitle.isAnimating
                 NumberAnimation {
                     duration: 600
+                    easing.type: Easing.InOutQuad
+                    onRunningChanged: {
+                        if (!running && bitmapTitle.opacity === 0.0) {
+                            bitmapTitle.x = bitmapTitle.baseX - bitmapTitle.slideOffset;
+                        }
+                    }
                 }
             }
 
             Behavior on x {
-                PropertyAnimation {
-                    properties: "x"
-                    easing.type: Easing.InOutQuad
+                enabled: !bitmapTitle.isAnimating
+                NumberAnimation {
                     duration: 600
+                    easing.type: Easing.InOutQuad
                 }
             }
 
@@ -211,14 +222,31 @@ PanelWindow {
             }
 
             function showTitle() {
-                x = (deltatune.implicitWidth - width) + 100;
-                isVisible = true;
-                hideTimer.restart();
+                hideTimer.stop();
+                isAnimating = true;
+                opacity = 0.0;
+                x = baseX - slideOffset;
+                showAnimationTimer.start();
+            }
+
+            Timer {
+                id: showAnimationTimer
+                interval: 10
+                repeat: false
+                onTriggered: {
+                    bitmapTitle.isAnimating = false;
+                    bitmapTitle.opacity = 1.0;
+                    bitmapTitle.x = bitmapTitle.baseX;
+                    hideTimer.restart();
+                }
             }
 
             function hideTitle() {
-                x = (deltatune.implicitWidth - width) - 100;
-                isVisible = false;
+                hideTimer.stop();
+                showAnimationTimer.stop();
+                isAnimating = false;
+                opacity = 0.0;
+                x = baseX - slideOffset;
             }
 
             Timer {

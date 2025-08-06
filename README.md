@@ -25,11 +25,11 @@ deltatune
   - [x] ANSI (English, Spanish, etc)
   - [x] Japanese
   - [x] Korean
-- [ ] Enter/leave animation
+- [x] Enter/leave animation
   - [x] React to `playerctl status`
   - [x] Leave animation
-  - [ ] Enter animation
-  - [ ] Fix inconsistencies
+  - [x] Enter animation
+  - [x] Fix inconsistencies
 - [ ] Configuration
   - [ ] Scale
   - [ ] Position/anchor
