@@ -211,6 +211,7 @@ PanelWindow {
                                         bitmapTitle.showTitle();
                                     } else if (newTitle.length === 0) {
                                         bitmapTitle.hideTitle();
+                                        destroy();
                                     }
                                 }
                             }
