@@ -4,8 +4,7 @@
 
 <img width="1408" height="771" alt="1754263375" src="https://github.com/user-attachments/assets/57296ec5-fd1f-45ed-a102-9af09c56bdfe" />
 
-[Video_1754278452.webm](https://github.com/user-attachments/assets/d22637d8-1d4f-4f0c-8ac7-6eb5180b50a3)
-
+https://github.com/user-attachments/assets/403449fa-929f-48e9-915a-d1a5b8d6fdd0
 
 ## Requirements
 
