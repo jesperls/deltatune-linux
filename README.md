@@ -17,6 +17,7 @@ Arch Linux [(AUR)](https://aur.archlinux.org/packages/deltatune-linux):
 
 ```sh
 yay -S deltatune-linux
+deltatune
 ```
 
 Other distros:
