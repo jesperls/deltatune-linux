@@ -13,6 +13,14 @@ https://github.com/user-attachments/assets/403449fa-929f-48e9-915a-d1a5b8d6fdd0
 
 ## Install & run
 
+Arch Linux:
+
+```sh
+yay -S deltatune-linux
+```
+
+Other distros:
+
 ```sh
 git clone https://github.com/ThatOneCalculator/deltatune-linux
 sudo make install
@@ -20,8 +28,6 @@ deltatune
 ```
 
 ## Todo
-
-⚠️ Work-in-progress lol ⚠️
 
 - [x] Get the title displaying properly
   - [x] ANSI (English, Spanish, etc)
@@ -35,7 +41,7 @@ deltatune
 - [ ] Configuration
   - [ ] Scale
   - [ ] Position/anchor
-- [ ] AUR package
+- [x] AUR package
 - [ ] Artist info(?)
 
 ## Additional credits
