@@ -49,7 +49,7 @@ PanelWindow {
             height: MusicTitleFont.fontInfo.lineHeight
 
             opacity: 0.0
-            x: baseX - slideOffset
+            x: baseX + slideOffset
 
             Behavior on opacity {
                 enabled: !bitmapTitle.isAnimating
