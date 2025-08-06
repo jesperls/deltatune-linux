@@ -13,7 +13,7 @@ https://github.com/user-attachments/assets/403449fa-929f-48e9-915a-d1a5b8d6fdd0
 
 ## Install & run
 
-Arch Linux:
+Arch Linux [(AUR)](https://aur.archlinux.org/packages/deltatune-linux):
 
 ```sh
 yay -S deltatune-linux
