@@ -43,6 +43,7 @@ deltatune
   - [ ] Position/anchor
 - [x] AUR package
 - [ ] Artist info(?)
+- [ ] 🦀 Rewrite it in Rust
 
 ## Additional credits
 
