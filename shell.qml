@@ -10,6 +10,8 @@ import "./fonts/Ramche.js" as Ramche
 
 PanelWindow {
     id: deltatune
+    visible: false
+    mask: Region {}
 
     anchors {
         top: Config.c.anchors.top ?? true
@@ -234,7 +236,9 @@ PanelWindow {
 
             function showTitle() {
                 hideTimer.stop();
+                hideWindowTimer.stop();
                 isAnimating = true;
+                deltatune.visible = true;
                 opacity = 0.0;
                 x = baseX - slideOffset;
                 showAnimationTimer.start();
@@ -258,6 +262,7 @@ PanelWindow {
                 isAnimating = false;
                 opacity = 0.0;
                 x = baseX - slideOffset;
+                hideWindowTimer.restart();
             }
 
             Timer {
@@ -275,6 +280,13 @@ PanelWindow {
                 onTriggered: bitmapTitle.updateMusicInfo()
             }
 
+            Timer {
+                id: hideWindowTimer
+                interval: Math.max(50, bitmapTitle.animationDuration + 20)
+                running: false
+                repeat: false
+                onTriggered: deltatune.visible = false
+            }
             Component.onCompleted: updateMusicInfo()
         }
     }
