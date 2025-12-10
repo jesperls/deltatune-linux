@@ -28,6 +28,56 @@ sudo make install
 deltatune
 ```
 
+Nix (flake):
+
+```sh
+nix run github:jesperls/deltatune-linux
+```
+
+From a local checkout:
+
+```sh
+nix run .
+```
+
+Nix install options:
+- NixOS module (user service):
+  ```nix
+  {
+    inputs.deltatune-linux.url = "github:jesperls/deltatune-linux";
+    outputs = { self, nixpkgs, deltatune-linux, ... }: {
+      nixosConfigurations.yourHost = nixpkgs.lib.nixosSystem {
+        modules = [
+          deltatune-linux.nixosModules.default
+          {
+            services.deltatune.enable = true;
+          }
+        ];
+      };
+    };
+  }
+  ```
+
+- Home Manager module (user service):
+  ```nix
+  {
+    inputs.deltatune-linux.url = "github:jesperls/deltatune-linux";
+    outputs = { self, nixpkgs, home-manager, deltatune-linux, ... }: {
+      homeConfigurations.me = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs { system = "x86_64-linux"; };
+        modules = [
+          deltatune-linux.homeManagerModules.default
+          {
+            services.deltatune.enable = true;
+          }
+        ];
+      };
+    };
+  }
+  ```
+
+- Plain package only: add `inputs.deltatune-linux.url = "github:jesperls/deltatune-linux";` then `environment.systemPackages` (NixOS) or `home.packages` (Home Manager) with `inputs.deltatune-linux.packages.${pkgs.stdenv.hostPlatform.system}.default`
+
 ## Configuration
 
 After installing, edit `/etc/xdg/quickshell/deltatune/config.js`. Configuration keys are explained in the file, the default configuration puts DeltaTune at the top-right.
@@ -41,8 +91,7 @@ After installing, edit `/etc/xdg/quickshell/deltatune/config.js`. Configuration 
 - [x] Enter/leave animation
 - [x] Configuration
 - [x] AUR package
-- [ ] Artist info(?)
-- [ ] 🦀 Rewrite it in Rust
+- [x] NIX flake
 
 ## Additional credits
 
